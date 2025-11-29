@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valencia Walker | AI & Software Engineering Expert</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .contact-info a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #764ba2;
+        }
+
+        .section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin: 25px 0 15px;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .expertise-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .expertise-card h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .services-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .services-list li {
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .services-list li:hover {
+            background: #e8ebff;
+            transform: translateX(5px);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .cta-section h2 {
+            color: white;
+            border-bottom: 3px solid white;
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            font-size: 1.1em;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .next-steps {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .next-steps ol {
+            margin-left: 25px;
+            margin-top: 15px;
+        }
+
+        .next-steps li {
+            margin: 12px 0;
+            font-size: 1.05em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            font-size: 0.95em;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Valencia Walker</h1>
+            <p class="tagline">AI Framework Engineer | Software Engineer | Technology Innovation Leader</p>
+            <div class="contact-info">
+                <a href="mailto:valenciawalker7373@gmail.com">📧 valenciawalker7373@gmail.com</a>
+                <a href="tel:810-347-2087">📱 810-347-2087</a>
+                <a href="https://www.linkedin.com/in/valencia-walker-306a7477" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/ValenciaW9" target="_blank">💻 GitHub</a>
+                <a href="https://linktr.ee" target="_blank">🔗 Linktree</a>
+            </div>
+        </header>
+
+        <div class="section">
+            <h2>Who is Valencia Walker?</h2>
+            <p style="font-size: 1.1em; margin-bottom: 20px;">
+                Valencia Walker is a visionary Software Engineer and AI Framework Engineer specializing in cutting-edge artificial intelligence, 
+                backend architecture, and scalable cloud infrastructure. Currently pioneering multimodal AI research at Deepiri and driving 
+                technology innovation at OpenQQuantify, Valencia brings a unique blend of technical expertise and strategic thinking to solve 
+                complex technological challenges.
+            </p>
+            
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <h4>🧠 AI & Machine Learning</h4>
+                    <p>Multimodal fusion, GPT-4 fine-tuning, neural networks, and advanced AI research</p>
+                </div>
+                <div class="expertise-card">
+                    <h4>⚙️ Backend Architecture</h4>
+                    <p>API development, database design, cloud infrastructure (AWS, Azure), scalable systems</p>
+                </div>
+                <div class="expertise-card">
+                    <h4>🔬 Research & Innovation</h4>
+                    <p>Neuro-symbolic AI, Graph Neural Networks, semantic reasoning, and theoretical frameworks</p>
+                </div>
+                <div class="expertise-card">
+                    <h4>📊 Technology Strategy</h4>
+                    <p>Product development, technical marketing, cross-functional collaboration, MVP delivery</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>What Valencia Can Do For You</h2>
+            <ul class="services-list">
+                <li><strong>🚀 AI System Development:</strong> Design and implement cutting-edge AI solutions using multimodal models, transformer architectures, and advanced machine learning frameworks</li>
+                <li><strong>🏗️ Scalable Backend Solutions:</strong> Build robust, secure, and high-performance backend systems with REST APIs, microservices architecture, and cloud infrastructure</li>
+                <li><strong>💡 Technical Consulting:</strong> Provide strategic guidance on AI integration, system architecture, and technology stack decisions for your business needs</li>
+                <li><strong>🔧 Custom Software Engineering:</strong> Develop tailored software solutions from embedded systems to enterprise applications using modern technologies</li>
+                <li><strong>📈 Product Development:</strong> Transform ideas into MVPs with complete technical implementation, from concept to deployment</li>
+                <li><strong>🤝 Technology Partnership:</strong> Collaborate with your team to enhance existing systems, optimize performance, and integrate advanced AI capabilities</li>
+            </ul>
+
+            <h3>Core Technologies & Skills</h3>
+            <div class="skills-container">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript/TypeScript</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">GPT-4</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">REST APIs</span>
+                <span class="skill-tag">MySQL/PostgreSQL</span>
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">Computer Vision</span>
+                <span class="skill-tag">Graph Neural Networks</span>
+                <span class="skill-tag">Neo4j</span>
+                <span class="skill-tag">OpenCV</span>
+                <span class="skill-tag">Embedded Systems</span>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Transform Your Technology?</h2>
+            <p style="font-size: 1.2em; margin: 20px 0;">Let's discuss how AI and innovative software solutions can drive your business forward.</p>
+            
+            <div class="next-steps">
+                <h3 style="color: #667eea; margin-top: 0;">📋 Next Steps - Getting Started</h3>
+                <ol>
+                    <li><strong>Schedule a Discovery Call:</strong> Book a meeting to discuss your project needs, challenges, and goals</li>
+                    <li><strong>Explore OpenQQuantify:</strong> Visit our website to learn about our technology solutions and capabilities</li>
+                    <li><strong>Review Requirements:</strong> We'll analyze your technical requirements and propose tailored solutions</li>
+                    <li><strong>Receive a Proposal:</strong> Get a detailed plan outlining approach, timeline, and deliverables</li>
+                    <li><strong>Begin Collaboration:</strong> Start building your innovative solution with expert guidance</li>
+                </ol>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="https://calendly.com/openqquantifyexecutivemeeting/businessdevelopment" class="btn btn-primary" target="_blank">
+                    📅 Book a Meeting
+                </a>
+                <a href="https://www.openqquantify.com/" class="btn btn-secondary" target="_blank">
+                    🌐 Visit OpenQQuantify
+                </a>
+                <a href="https://www.themedicaltechnology.com/" class="btn btn-secondary" target="_blank">
+                    🏥 The Medical Technology
+                </a>
+                <a href="https://www.roboticsplatforms.com/doctorsonline/" class="btn btn-secondary" target="_blank">
+                    🤖 Doctors Online Platform
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Current Focus & Innovation</h2>
+            <p style="font-size: 1.05em; margin-bottom: 20px;">
+                Currently leading AI framework research at <strong>Deepiri</strong>, exploring the frontiers of multimodal fusion, 
+                semantic graphs, and neuro-symbolic AI. Simultaneously driving technology marketing and software engineering initiatives 
+                at <strong>OpenQQuantify</strong>, where cutting-edge AI meets practical business applications.
+            </p>
+            <p style="font-size: 1.05em;">
+                With advanced degrees in Psychology (Masters), Computer Science (BS in progress), and a PhD in General Psychology 
+                (in progress), Valencia brings a unique interdisciplinary perspective that bridges human cognition and artificial intelligence.
+            </p>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Valencia Walker | AI Framework Engineer & Software Engineer</p>
+            <p style="margin-top: 10px;">Flint, Michigan | Available for Remote Collaboration Worldwide</p>
+        </footer>
+    </div>
+</body>
+</html>
