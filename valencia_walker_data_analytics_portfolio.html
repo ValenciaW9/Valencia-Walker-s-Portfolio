@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valencia Walker | Data Analytics Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f8f5;
+  --bg2: #eef0ea;
+  --bg3: #e5e8df;
+  --surface: #ffffff;
+  --dark: #0d0f0a;
+  --dark2: #171a12;
+  --dark3: #1f2318;
+  --green: #2dcc70;
+  --green2: #22a85c;
+  --green3: #167a42;
+  --lime: #c8f135;
+  --lime2: #a8d020;
+  --text: #0d0f0a;
+  --text2: #4a5240;
+  --text3: #7a8870;
+  --border: rgba(13,15,10,0.1);
+  --border2: rgba(13,15,10,0.2);
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --display: 'Syne', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* SCANLINE OVERLAY */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.012) 2px,
+    rgba(0,0,0,0.012) 4px
+  );
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: var(--dark);
+  border-bottom: 1px solid rgba(45,204,112,0.2);
+  padding: 0 3rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo::before {
+  content: '▶';
+  font-size: 9px;
+  animation: blink 1.2s step-end infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--green); }
+
+.nav-status {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+@keyframes pulse-green {
+  0%,100%{box-shadow:0 0 0 0 rgba(45,204,112,0.4)}
+  50%{box-shadow:0 0 0 6px rgba(45,204,112,0)}
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  padding: 80px 3rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 3rem;
+  align-items: center;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+/* dot grid bg */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(45,204,112,0.15) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.hero-left { position: relative; z-index: 1; }
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-tag::before { content: '//'; opacity: 0.5; }
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  color: white;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 .accent { color: var(--lime); display: block; }
+
+.hero-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  max-width: 520px;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  font-family: var(--sans);
+  font-weight: 300;
+}
+
+.hero-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: 1px solid rgba(45,204,112,0.25);
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: all 0.2s;
+  background: rgba(45,204,112,0.05);
+}
+
+.hc-chip:hover {
+  background: var(--green);
+  color: var(--dark);
+  border-color: var(--green);
+}
+
+/* HERO RIGHT — dashboard card */
+.hero-dashboard {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(45,204,112,0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(45,204,112,0.15);
+}
+
+.dash-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dash-dots { display: flex; gap: 5px; }
+.dash-dots span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.dd1 { background: #ff5f57; }
+.dd2 { background: #febc2e; }
+.dd3 { background: #28c840; }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.stat-box {
+  background: rgba(45,204,112,0.06);
+  border: 1px solid rgba(45,204,112,0.15);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-family: var(--display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--lime);
+  line-height: 1;
+}
+
+.stat-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--green);
+  margin-top: 4px;
+}
+
+/* mini bar chart */
+.mini-chart { margin-bottom: 1.25rem; }
+
+.mc-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.bars { display: flex; align-items: flex-end; gap: 5px; height: 60px; }
+
+.bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+
+.bar {
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  background: var(--green);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  animation: grow-bar 1s ease-out forwards;
+  transform-origin: bottom;
+}
+
+.bar:hover { opacity: 1; }
+
+@keyframes grow-bar {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.bar-yr {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: rgba(255,255,255,0.25);
+}
+
+.skill-bars { display: grid; gap: 8px; }
+
+.sbar-row { display: grid; gap: 4px; }
+
+.sbar-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+}
+
+.sbar-track {
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.sbar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--lime));
+  border-radius: 2px;
+  animation: fill-bar 1.5s ease-out forwards;
+  transform-origin: left;
+}
+
+@keyframes fill-bar { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+/* SECTIONS */
+.section-light { background: var(--bg); padding: 5.5rem 3rem; }
+.section-mid { background: var(--bg2); padding: 5.5rem 3rem; }
+.section-dark { background: var(--dark2); padding: 5.5rem 3rem; }
+.section-darker { background: var(--dark); padding: 5.5rem 3rem; }
+
+.inner { max-width: 1100px; margin: 0 auto; }
+
+/* SECTION HEADERS */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.sec-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 0.12em;
+  background: rgba(45,204,112,0.1);
+  border: 1px solid rgba(45,204,112,0.25);
+  border-radius: 4px;
+  padding: 4px 10px;
+  flex-shrink: 0;
+}
+
+.sec-num-dark {
+  background: rgba(45,204,112,0.12);
+  border-color: rgba(45,204,112,0.2);
+  color: var(--green);
+}
+
+.sec-title {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.sec-title-light { color: white; }
+.sec-title .hi { color: var(--green2); }
+.sec-title-light .hi { color: var(--lime); }
+
+.sec-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.sec-line-dark { background: rgba(45,204,112,0.15); }
+
+/* STATEMENT */
+.statement-card {
+  background: var(--dark3);
+  border: 1px solid rgba(45,204,112,0.2);
+  border-radius: 12px;
+  padding: 2.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.statement-card::before {
+  content: 'DATA_ANALYST.profile';
+  position: absolute;
+  top: 1.25rem; right: 1.5rem;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(45,204,112,0.25);
+  letter-spacing: 0.08em;
+}
+
+.stmt-line {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(45,204,112,0.5);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.statement-card p {
+  font-size: 1.15rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.85;
+  margin-bottom: 1.1rem;
+  font-family: var(--sans);
+  font-weight: 300;
+}
+
+.statement-card p strong { color: var(--lime); font-weight: 500; }
+
+.stmt-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1.5rem;
+}
+
+.stmt-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  border: 1px solid rgba(45,204,112,0.3);
+  border-radius: 3px;
+  padding: 5px 12px;
+}
+
+/* STRENGTHS */
+.str-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.str-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+  position: relative;
+  transition: transform 0.25s, border-color 0.25s;
+  overflow: hidden;
+}
+
+.str-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), var(--lime));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s;
+}
+
+.str-card:hover { transform: translateY(-3px); border-color: var(--border2); }
+.str-card:hover::before { transform: scaleX(1); }
+
+.str-icon {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green2);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  background: rgba(45,204,112,0.08);
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+
+.str-card h3 {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.str-card p { font-size: 13.5px; color: var(--text2); line-height: 1.75; }
+
+/* VALUES */
+.val-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.val-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(45,204,112,0.12);
+  border-radius: 10px;
+  padding: 1.75rem;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.val-card:hover {
+  background: rgba(45,204,112,0.06);
+  border-color: rgba(45,204,112,0.25);
+}
+
+.val-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(45,204,112,0.4);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.val-card h3 {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.6rem;
+}
+
+.val-card p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.75; }
+
+/* EXPERIENCE */
+.exp-list { display: grid; gap: 0; }
+
+.exp-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2.5rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.exp-row:first-child { border-top: 1px solid var(--border); }
+.exp-row:hover { background: rgba(45,204,112,0.02); }
+
+.exp-left { padding-top: 4px; }
+
+.exp-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.exp-org {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--green2);
+  letter-spacing: -0.01em;
+}
+
+.exp-right h3 {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.exp-bullets { list-style: none; display: grid; gap: 5px; }
+
+.exp-bullets li {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.7;
+  padding-left: 18px;
+  position: relative;
+}
+
+.exp-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-size: 11px;
+  top: 3px;
+}
+
+/* EDUCATION — dark section */
+.edu-list { display: grid; gap: 1rem; }
+
+.edu-row {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.edu-row:hover {
+  border-color: rgba(45,204,112,0.25);
+  background: rgba(45,204,112,0.04);
+}
+
+.edu-row h3 {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 5px;
+  letter-spacing: -0.01em;
+}
+
+.edu-row p {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.04em;
+}
+
+.edu-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge-prog {
+  background: rgba(200,241,53,0.12);
+  color: var(--lime);
+  border: 1px solid rgba(200,241,53,0.25);
+}
+
+.badge-done {
+  background: rgba(45,204,112,0.1);
+  color: var(--green);
+  border: 1px solid rgba(45,204,112,0.2);
+}
+
+/* CERTS */
+.certs-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cert-chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text2);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 8px 16px;
+  background: var(--surface);
+  transition: all 0.2s;
+  cursor: default;
+  letter-spacing: 0.02em;
+}
+
+.cert-chip:hover {
+  background: var(--dark);
+  color: var(--green);
+  border-color: rgba(45,204,112,0.4);
+  transform: translateY(-2px);
+}
+
+/* SKILLS grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.skill-col {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.skill-col-head {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green2);
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-col-head::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skill-col ul { list-style: none; display: grid; gap: 4px; }
+
+.skill-col li {
+  font-size: 13px;
+  color: var(--text2);
+  padding: 5px 0 5px 14px;
+  position: relative;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+.skill-col li::before {
+  content: '›';
+  position: absolute;
+  left: 2px;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* FOOTER */
+footer {
+  background: var(--dark);
+  padding: 4rem 3rem;
+  border-top: 1px solid rgba(45,204,112,0.15);
+}
+
+.foot-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.foot-name {
+  font-family: var(--display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.08);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.foot-tagline {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.08em;
+}
+
+.foot-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.foot-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.foot-link:hover { color: var(--green); }
+
+.foot-copy {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 0.06em;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* FADE IN */
+.fade { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade.in { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: 80px 1.5rem 3rem; }
+  .hero-dashboard { display: none; }
+  .section-light, .section-mid, .section-dark, .section-darker { padding: 4rem 1.5rem; }
+  .str-grid, .val-grid, .skills-grid { grid-template-columns: 1fr; }
+  .exp-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .nav-status { display: none; }
+  .foot-inner { grid-template-columns: 1fr; }
+  .foot-links { align-items: flex-start; }
+  .edu-row { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VW // DATA ANALYTICS</div>
+  <ul class="nav-links">
+    <li><a href="#statement">Profile</a></li>
+    <li><a href="#strengths">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certs">Certs</a></li>
+  </ul>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    Available for opportunities
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Data Analytics Portfolio — 2025</p>
+    <h1>
+      Valencia<br>
+      Walker
+      <span class="accent">Data Analyst.</span>
+    </h1>
+    <p class="hero-desc">
+      Multidisciplinary data analyst, software engineer, and Ph.D. candidate bridging Python, SQL, statistical research, AI/ML, and psychology to transform raw data into decisions that protect people and drive impact.
+    </p>
+    <div class="hero-contacts">
+      <a href="tel:810-880-3042" class="hc-chip">&#128241; 810-880-3042</a>
+      <a href="mailto:vwalker9088@gmail.com" class="hc-chip">&#9993; vwalker9088@gmail.com</a>
+      <a href="https://linktr.ee/valenciawalker" target="_blank" class="hc-chip">&#128279; Linktree</a>
+      <a href="https://www.linkedin.com/in/valencia-walker-306a7477" target="_blank" class="hc-chip">&#128188; LinkedIn</a>
+      <a href="https://github.com/ValenciaW9" target="_blank" class="hc-chip">&#128187; GitHub</a>
+    </div>
+  </div>
+
+  <div class="hero-dashboard">
+    <div class="dash-header">
+      <span class="dash-title">analyst_profile.json</span>
+      <div class="dash-dots">
+        <span class="dd1"></span><span class="dd2"></span><span class="dd3"></span>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-label">Degrees</div>
+        <div class="stat-value" data-count="5">5</div>
+        <div class="stat-sub">+ 2 in progress</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Certifications</div>
+        <div class="stat-value" data-count="14">14</div>
+        <div class="stat-sub">IBM · Harvard · CITI</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Roles Held</div>
+        <div class="stat-value" data-count="6">6</div>
+        <div class="stat-sub">tech · research · health</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Languages</div>
+        <div class="stat-value" data-count="8">8+</div>
+        <div class="stat-sub">Python · SQL · JS · more</div>
+      </div>
+    </div>
+
+    <div class="mini-chart">
+      <div class="mc-label">Experience timeline</div>
+      <div class="bars">
+        <div class="bar-wrap">
+          <div class="bar" style="height:22px;animation-delay:0.1s"></div>
+          <span class="bar-yr">'19</span>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:30px;animation-delay:0.2s"></div>
+          <span class="bar-yr">'20</span>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:26px;animation-delay:0.3s"></div>
+          <span class="bar-yr">'21</span>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:34px;animation-delay:0.4s;background:rgba(45,204,112,0.3)"></div>
+          <span class="bar-yr">'22</span>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:38px;animation-delay:0.5s;background:rgba(45,204,112,0.4)"></div>
+          <span class="bar-yr">'23</span>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:48px;animation-delay:0.6s"></div>
+          <span class="bar-yr">'24</span>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar" style="height:56px;animation-delay:0.7s;background:var(--lime)"></div>
+          <span class="bar-yr">'25</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-bars">
+      <div class="mc-label">Core competencies</div>
+      <div class="sbar-row">
+        <div class="sbar-meta"><span>Python / Data Science</span><span>95%</span></div>
+        <div class="sbar-track"><div class="sbar-fill" style="width:95%;animation-delay:0.2s"></div></div>
+      </div>
+      <div class="sbar-row">
+        <div class="sbar-meta"><span>SQL &amp; Databases</span><span>90%</span></div>
+        <div class="sbar-track"><div class="sbar-fill" style="width:90%;animation-delay:0.35s"></div></div>
+      </div>
+      <div class="sbar-row">
+        <div class="sbar-meta"><span>Statistical Analysis</span><span>88%</span></div>
+        <div class="sbar-track"><div class="sbar-fill" style="width:88%;animation-delay:0.5s"></div></div>
+      </div>
+      <div class="sbar-row">
+        <div class="sbar-meta"><span>AI / ML</span><span>85%</span></div>
+        <div class="sbar-track"><div class="sbar-fill" style="width:85%;animation-delay:0.65s"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFESSIONAL STATEMENT -->
+<section class="section-darker" id="statement">
+  <div class="inner">
+    <div class="sec-head fade">
+      <span class="sec-num sec-num-dark">01</span>
+      <h2 class="sec-title sec-title-light">Professional <span class="hi">Statement</span></h2>
+      <div class="sec-line sec-line-dark"></div>
+    </div>
+    <div class="statement-card fade">
+      <div class="stmt-line">// analyst_profile — Valencia Walker — Flint, MI</div>
+      <p>I am a <strong>detail-oriented and technically skilled</strong> data analytics professional with a background in software engineering, AI/ML development, and psychological research, bringing a uniquely multidisciplinary perspective to identifying patterns, building pipelines, and translating data into decisions.</p>
+      <p>I am deeply committed to <strong>protecting people and organizations</strong> by upholding privacy, ethics, and compliance, while ensuring that analytical solutions remain equitable and accessible to all stakeholders.</p>
+      <p>My <strong>analytical mindset, programming proficiency, and strong communication skills</strong> allow me to collaborate effectively across teams and contribute meaningfully to the data and security goals of any organization I serve.</p>
+      <div class="stmt-tags">
+        <span class="stmt-tag">Python &amp; SQL</span>
+        <span class="stmt-tag">Statistical Methods</span>
+        <span class="stmt-tag">Data Pipelines</span>
+        <span class="stmt-tag">AI / ML</span>
+        <span class="stmt-tag">Research-Led</span>
+        <span class="stmt-tag">Ethics-First</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRENGTHS -->
+<section class="section-light" id="strengths">
+  <div class="inner">
+    <div class="sec-head fade">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">Core <span class="hi">Strengths</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="str-grid">
+      <div class="str-card fade">
+        <div class="str-icon">FUNC_01 // TECHNICAL</div>
+        <h3>Programming &amp; Technical Skills</h3>
+        <p>Python, SQL, JavaScript, NumPy, pandas, REST APIs, cloud infrastructure — applying full engineering depth to build and automate data workflows end-to-end.</p>
+      </div>
+      <div class="str-card fade">
+        <div class="str-icon">FUNC_02 // ANALYSIS</div>
+        <h3>Analytical Thinking &amp; Problem Solving</h3>
+        <p>Data-driven decision making honed through software engineering, graduate-level statistics (PSY-7104), and clinical research coordination — every insight evidence-backed.</p>
+      </div>
+      <div class="str-card fade">
+        <div class="str-icon">FUNC_03 // PRECISION</div>
+        <h3>Attention to Detail</h3>
+        <p>Precision-focused approach to data quality, pipeline integrity, and ensuring that outputs are clean, reproducible, and trustworthy before reaching any stakeholder.</p>
+      </div>
+      <div class="str-card fade">
+        <div class="str-icon">FUNC_04 // COMMS</div>
+        <h3>Communication &amp; Collaboration</h3>
+        <p>Experienced translating complex analytical findings for technical and non-technical audiences — from engineering teams to clinical researchers to executive stakeholders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section-dark" id="values">
+  <div class="inner">
+    <div class="sec-head fade">
+      <span class="sec-num sec-num-dark">03</span>
+      <h2 class="sec-title sec-title-light">Data <span class="hi">Values</span></h2>
+      <div class="sec-line sec-line-dark"></div>
+    </div>
+    <div class="val-grid">
+      <div class="val-card fade">
+        <div class="val-num">VALUE_01</div>
+        <h3>Protecting People &amp; Organizations</h3>
+        <p>Every analysis considers the humans behind the numbers — their privacy, safety, and dignity are non-negotiable constraints on how data is collected, stored, and used.</p>
+      </div>
+      <div class="val-card fade">
+        <div class="val-num">VALUE_02</div>
+        <h3>Upholding Privacy &amp; Ethics</h3>
+        <p>Grounded in an ethical framework shaped by psychology, healthcare research, and CITI-certified research training — data analysis should never exploit or expose.</p>
+      </div>
+      <div class="val-card fade">
+        <div class="val-num">VALUE_03</div>
+        <h3>Ensuring Equitable Access</h3>
+        <p>Analytical insights and data-driven tools should be accessible to all stakeholders, regardless of technical background — clear communication is part of the deliverable.</p>
+      </div>
+      <div class="val-card fade">
+        <div class="val-num">VALUE_04</div>
+        <h3>Adhering to Laws &amp; Compliance</h3>
+        <p>Committed to operating within regulatory frameworks — HIPAA, IRB protocols, data governance standards — ensuring data practices protect both users and organizations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section-light" id="experience">
+  <div class="inner">
+    <div class="sec-head fade">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Professional <span class="hi">Experience</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Aug 2024 – Present</div>
+          <div class="exp-org">OpenQQuantify</div>
+        </div>
+        <div class="exp-right">
+          <h3>Technology Marketing Director, Software Engineer &amp; Social Media Manager</h3>
+          <ul class="exp-bullets">
+            <li>Fine-tuned GPT-5.0 Mini and GPT-4.0 models for electronics and embedded systems applications, improving domain-specific accuracy and reliability.</li>
+            <li>Designed and implemented multi-agent chatbot architectures where specialized AI agents collaborate on code synthesis, schematic generation, simulation control, and system orchestration.</li>
+            <li>Enabled agents to dynamically exchange context, validate outputs, and refine decisions based on real-time feedback from hardware-in-the-loop (HIL) systems.</li>
+            <li>Developed GPU-accelerated software for RISC-V and low-level programming environments; programmed and optimized SPI, I2C, and UART communication protocols.</li>
+            <li>Converted physical boards (Arduino, Photon, Raspberry Pi, Intel, ESP32) into structured 2D schematics and 3D models for use in CesiumJS-based digital twin simulations.</li>
+            <li>Led social media content management for LinkedIn; managed multi-channel marketing campaigns including SEO, SEM, and analytics.</li>
+            <li>Collaborated with cross-functional teams to integrate software with hardware, AI-driven, and embedded systems; contributed to open-source Generative AI projects.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Nov 2024 – Feb 2025</div>
+          <div class="exp-org">MealMatch AI</div>
+        </div>
+        <div class="exp-right">
+          <h3>Backend Engineer</h3>
+          <ul class="exp-bullets">
+            <li>Built and maintained REST APIs facilitating communication between backend and mobile applications, including the Koffee AI recommendation engine.</li>
+            <li>Developed a grocery price comparison app and grocery meal planner app, handling both frontend and backend tasks end-to-end.</li>
+            <li>Designed scalable SQL and NoSQL database architectures to manage user profiles, meal plans, and product inventories.</li>
+            <li>Created and managed cloud infrastructure on AWS, Google Cloud, and Azure; ensured reliability through unit, integration, and performance tests.</li>
+            <li>Implemented security protocols to protect sensitive user information and payment data; collaborated with CTO and product managers on MVP requirements.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Sep 2020 – Mar 2021</div>
+          <div class="exp-org">PACE Group International</div>
+        </div>
+        <div class="exp-right">
+          <h3>Data Research Specialist</h3>
+          <ul class="exp-bullets">
+            <li>Conducted aviation research data analysis and mining operations, contributing to industry insights and reports.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Oct 2020 – Dec 2020</div>
+          <div class="exp-org">AgentC Solutions LLC</div>
+        </div>
+        <div class="exp-right">
+          <h3>Medicare Advocate</h3>
+          <ul class="exp-bullets">
+            <li>Provided expert client education on Medicare benefits and insurance options while maintaining full HIPAA compliance.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Oct 2019 – Nov 2019</div>
+          <div class="exp-org">Medical Research Center</div>
+        </div>
+        <div class="exp-right">
+          <h3>Clinical Research Coordinator</h3>
+          <ul class="exp-bullets">
+            <li>Managed clinical tasks including conducting case studies, performing patient assessments, and coordinating research workflows.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row fade">
+        <div class="exp-left">
+          <div class="exp-date">Aug 2019 – Sep 2019</div>
+          <div class="exp-org">University of Chicago</div>
+        </div>
+        <div class="exp-right">
+          <h3>Survey Coordinator</h3>
+          <ul class="exp-bullets">
+            <li>Researched the Flint Water Crisis and performed quantitative data analysis using Excel for academic reporting.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section-darker" id="education">
+  <div class="inner">
+    <div class="sec-head fade">
+      <span class="sec-num sec-num-dark">05</span>
+      <h2 class="sec-title sec-title-light">Education</h2>
+      <div class="sec-line sec-line-dark"></div>
+    </div>
+    <div class="edu-list">
+      <div class="edu-row fade">
+        <div>
+          <h3>Ph.D. in General Psychology</h3>
+          <p>National University &nbsp;·&nbsp; Jun 2025 – Anticipated 2028</p>
+        </div>
+        <span class="edu-badge badge-prog">In Progress</span>
+      </div>
+      <div class="edu-row fade">
+        <div>
+          <h3>B.S. in Computer Science — Software Engineering</h3>
+          <p>Colorado Technical University &nbsp;·&nbsp; Oct 2024 – Apr 2028</p>
+        </div>
+        <span class="edu-badge badge-prog">In Progress</span>
+      </div>
+      <div class="edu-row fade">
+        <div>
+          <h3>Master of Arts in Psychology</h3>
+          <p>University of Phoenix – Arizona &nbsp;·&nbsp; 2022 – 2024</p>
+        </div>
+        <span class="edu-badge badge-done">Completed</span>
+      </div>
+      <div class="edu-row fade">
+        <div>
+          <h3>Bachelor of Science in Health Administration</h3>
+          <p>University of Michigan – Flint &nbsp;·&nbsp; 2014 – 2018</p>
+        </div>
+        <span class="edu-badge badge-done">Completed</span>
+      </div>
+      <div class="edu-row fade">
+        <div>
+          <h3>Associate of Science in Health Care Administration</h3>
+          <p>Colorado Technical University &nbsp;·&nbsp; 2011 – 2013</p>
+        </div>
+        <span class="edu-badge badge-done">Completed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section-mid" id="certs">
+  <div class="inner">
+    <div class="sec-head fade">
+      <span class="sec-num">06</span>
+      <h2 class="sec-title">Certifications <span class="hi">&amp; Courses</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="certs-wrap fade">
+      <span class="cert-chip">IBM Full Stack Developer</span>
+      <span class="cert-chip">IBM Python for Data Science, AI &amp; Dev</span>
+      <span class="cert-chip">IBM Node.js &amp; Express</span>
+      <span class="cert-chip">IBM React</span>
+      <span class="cert-chip">IBM Cloud Computing</span>
+      <span class="cert-chip">IBM Git &amp; GitHub</span>
+      <span class="cert-chip">IBM HTML, CSS &amp; JavaScript</span>
+      <span class="cert-chip">IBM Intro to Software Engineering</span>
+      <span class="cert-chip">FreeCodeCamp — Full Stack Developer</span>
+      <span class="cert-chip">Flatiron School — Software Engineering</span>
+      <span class="cert-chip">Harvard CS50</span>
+      <span class="cert-chip">CITI — Social &amp; Behavioral RCR</span>
+      <span class="cert-chip">CITI — Human Subject Research</span>
+      <span class="cert-chip">CITI — IRB Social &amp; Behavioral</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section-light" id="skills">
+  <div class="inner">
+    <div class="sec-head fade">
+      <span class="sec-num">07</span>
+      <h2 class="sec-title">Technical <span class="hi">Skills</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-col fade">
+        <div class="skill-col-head">Data &amp; Analytics</div>
+        <ul>
+          <li>Python (NumPy, pandas, SciPy)</li>
+          <li>SQL — PostgreSQL, MySQL</li>
+          <li>Statistical Analysis</li>
+          <li>Data Visualization</li>
+          <li>Quantitative Research</li>
+          <li>Excel / Data Mining</li>
+        </ul>
+      </div>
+      <div class="skill-col fade">
+        <div class="skill-col-head">AI &amp; Machine Learning</div>
+        <ul>
+          <li>GPT-4 / GPT-5 Fine-tuning</li>
+          <li>PyTorch &amp; TensorFlow</li>
+          <li>Multi-Agent Architectures</li>
+          <li>Hugging Face Transformers</li>
+          <li>Prompt Engineering</li>
+          <li>GPU Acceleration (CUDA)</li>
+        </ul>
+      </div>
+      <div class="skill-col fade">
+        <div class="skill-col-head">Backend &amp; APIs</div>
+        <ul>
+          <li>Node.js, FastAPI, Express</li>
+          <li>REST APIs &amp; GraphQL</li>
+          <li>NoSQL, Redis, Firebase</li>
+          <li>SQLAlchemy &amp; ORMs</li>
+          <li>API Security (OAuth2, JWT)</li>
+          <li>Docker &amp; Kubernetes</li>
+        </ul>
+      </div>
+      <div class="skill-col fade">
+        <div class="skill-col-head">Cloud &amp; DevOps</div>
+        <ul>
+          <li>AWS, Google Cloud, Azure</li>
+          <li>CI/CD — GitHub Actions</li>
+          <li>Infrastructure as Code</li>
+          <li>Terraform &amp; Pulumi</li>
+          <li>Performance Profiling</li>
+          <li>Unit &amp; Integration Testing</li>
+        </ul>
+      </div>
+      <div class="skill-col fade">
+        <div class="skill-col-head">Languages</div>
+        <ul>
+          <li>Python</li>
+          <li>JavaScript / TypeScript</li>
+          <li>Java &amp; C</li>
+          <li>Ruby</li>
+          <li>HTML &amp; CSS</li>
+          <li>SQL</li>
+        </ul>
+      </div>
+      <div class="skill-col fade">
+        <div class="skill-col-head">Research &amp; Compliance</div>
+        <ul>
+          <li>Clinical Research Methods</li>
+          <li>IRB / HIPAA Protocols</li>
+          <li>CITI Certified (3 credentials)</li>
+          <li>Graduate Statistics (PSY-7104)</li>
+          <li>Survey Design &amp; Analysis</li>
+          <li>Agile / Scrum</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="foot-inner">
+    <div>
+      <div class="foot-name">Valencia Walker</div>
+      <div class="foot-tagline">// Data Analytics · Software Engineering · Flint, MI · 2025</div>
+    </div>
+    <div class="foot-links">
+      <a href="mailto:vwalker9088@gmail.com" class="foot-link">&#9993; vwalker9088@gmail.com</a>
+      <a href="tel:810-880-3042" class="foot-link">&#128241; 810-880-3042</a>
+      <a href="https://linktr.ee/valenciawalker" target="_blank" class="foot-link">&#128279; Linktree</a>
+      <a href="https://www.linkedin.com/in/valencia-walker-306a7477" target="_blank" class="foot-link">&#128188; LinkedIn</a>
+      <a href="https://github.com/ValenciaW9" target="_blank" class="foot-link">&#128187; GitHub</a>
+      <a href="https://www.openqquantify.com/" target="_blank" class="foot-link">&#127758; OpenQQuantify</a>
+    </div>
+  </div>
+  <div class="foot-copy">&#169; 2025 Valencia Walker — Data Analytics Portfolio — All rights reserved</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.08 + 's';
+    obs.observe(el);
+  });
+</script>
+
+</body>
+</html>
