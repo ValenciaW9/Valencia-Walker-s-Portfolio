@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valencia Walker | UX & Web Design Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: #faf7f2;
+  --cream2: #f3ede3;
+  --cream3: #ede5d8;
+  --warm: #e8ddd0;
+  --brown: #c4a882;
+  --brown2: #a08060;
+  --dark: #1c1714;
+  --dark2: #2e2520;
+  --dark3: #3d3128;
+  --text: #1c1714;
+  --text2: #6b5c4e;
+  --text3: #9c8878;
+  --accent: #c4763a;
+  --accent2: #8b5e3c;
+  --green: #4a6741;
+  --sage: #7a9e72;
+  --border: rgba(196, 168, 130, 0.25);
+  --border2: rgba(196, 168, 130, 0.5);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  line-height: 1.7;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor {
+  width: 10px; height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, width 0.2s, height 0.2s;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.35s ease, width 0.3s, height 0.3s, opacity 0.3s;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+}
+
+a:hover ~ .cursor, button:hover ~ .cursor { transform: translate(-50%, -50%) scale(2); }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.25rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(250, 247, 242, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.nav-brand span { color: var(--accent); font-style: italic; }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text2);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 8rem 3rem 4rem;
+  gap: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  right: -100px; top: -100px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,168,130,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  color: var(--dark);
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--text2);
+  max-width: 460px;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.hero-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.contact-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: 1px solid var(--border2);
+  border-radius: 100px;
+  font-size: 12px;
+  color: var(--text2);
+  text-decoration: none;
+  transition: all 0.25s;
+  background: white;
+}
+
+.contact-chip:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-shape {
+  width: 380px;
+  height: 460px;
+  background: var(--cream2);
+  border-radius: 200px 200px 180px 180px;
+  border: 1px solid var(--border2);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hero-shape-inner {
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-initials {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 7rem;
+  font-weight: 300;
+  color: var(--brown);
+  line-height: 1;
+  font-style: italic;
+  opacity: 0.4;
+}
+
+.hero-role-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.role-tag {
+  background: white;
+  border: 1px solid var(--border2);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-size: 12px;
+  color: var(--text2);
+  letter-spacing: 0.05em;
+}
+
+.floating-tag {
+  position: absolute;
+  background: white;
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--text);
+  box-shadow: 0 4px 20px rgba(28,23,20,0.08);
+  white-space: nowrap;
+}
+
+.floating-tag strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.ft-1 { top: 40px; left: -40px; animation: float1 4s ease-in-out infinite; }
+.ft-2 { bottom: 60px; right: -50px; animation: float2 5s ease-in-out infinite; }
+.ft-3 { top: 50%; left: -60px; animation: float1 6s ease-in-out infinite reverse; }
+
+@keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes float2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(10px)} }
+
+/* SECTION COMMON */
+section { padding: 6rem 3rem; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.section-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  font-weight: 300;
+  color: var(--cream3);
+  line-height: 1;
+  font-style: italic;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1.1;
+}
+
+.section-title em { font-style: italic; color: var(--accent); }
+
+/* STATEMENT */
+.statement-section { background: var(--dark); }
+
+.statement-section .section-num { color: rgba(255,255,255,0.06); }
+.statement-section .section-title { color: white; }
+.statement-section .section-title em { color: var(--brown); }
+
+.statement-body {
+  max-width: 720px;
+}
+
+.statement-body p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.statement-body p:first-child { color: rgba(255,255,255,0.9); font-size: 1.65rem; }
+
+.statement-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2.5rem;
+}
+
+.stmt-tag {
+  border: 1px solid rgba(196,168,130,0.3);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown);
+}
+
+/* STRENGTHS */
+.strengths-section { background: var(--cream); }
+
+.strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.strength-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.strength-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+
+.strength-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(28,23,20,0.1); }
+.strength-card:hover::after { transform: scaleX(1); }
+
+.strength-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--cream3);
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.strength-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 0.75rem;
+}
+
+.strength-card p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+/* VALUES */
+.values-section { background: var(--cream2); }
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.value-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.75rem;
+  border: 1px solid var(--border);
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  transition: transform 0.25s;
+}
+
+.value-card:hover { transform: translateX(6px); }
+
+.value-marker {
+  width: 3px;
+  height: 100%;
+  min-height: 60px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.vm-orange { background: var(--accent); }
+.vm-green { background: var(--sage); }
+.vm-brown { background: var(--brown2); }
+.vm-dark { background: var(--dark3); }
+
+.value-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.value-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* EXPERIENCE */
+.exp-section { background: var(--cream); }
+
+.exp-list { display: grid; gap: 0; }
+
+.exp-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.exp-item:first-child { border-top: 1px solid var(--border); }
+
+.exp-meta { padding-top: 4px; }
+
+.exp-date {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 8px;
+}
+
+.exp-company {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.exp-content h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+
+.exp-bullets {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.exp-bullets li {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.7;
+  padding-left: 16px;
+  position: relative;
+}
+
+.exp-bullets li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--brown);
+  font-size: 11px;
+  top: 4px;
+}
+
+/* EDUCATION */
+.edu-section { background: var(--dark2); }
+.edu-section .section-title { color: white; }
+.edu-section .section-title em { color: var(--brown); }
+.edu-section .section-num { color: rgba(255,255,255,0.05); }
+
+.edu-grid { display: grid; gap: 1rem; }
+
+.edu-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(196,168,130,0.15);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  transition: background 0.25s;
+}
+
+.edu-card:hover { background: rgba(255,255,255,0.08); }
+
+.edu-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 4px;
+}
+
+.edu-card p { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+.edu-pill {
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.edu-pill.progress {
+  background: rgba(196,118,58,0.2);
+  color: var(--brown);
+  border: 1px solid rgba(196,118,58,0.3);
+}
+
+.edu-pill.done {
+  background: rgba(74,103,65,0.2);
+  color: var(--sage);
+  border: 1px solid rgba(74,103,65,0.3);
+}
+
+/* CERTIFICATIONS */
+.certs-section { background: var(--cream2); }
+
+.certs-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cert-item {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 9px 20px;
+  font-size: 13px;
+  color: var(--text2);
+  transition: all 0.2s;
+  cursor: default;
+}
+
+.cert-item:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* SKILLS */
+.skills-section { background: var(--cream); }
+
+.skills-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.skill-group h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border2);
+}
+
+.skill-group ul { list-style: none; }
+
+.skill-group ul li {
+  font-size: 13.5px;
+  color: var(--text2);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-group ul li::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--brown);
+  flex-shrink: 0;
+}
+
+/* FOOTER */
+footer {
+  background: var(--dark);
+  padding: 4rem 3rem;
+  text-align: center;
+}
+
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.15);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: 1px solid rgba(196,168,130,0.25);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--brown);
+  text-decoration: none;
+  transition: all 0.25s;
+}
+
+.footer-link:hover {
+  background: var(--brown);
+  color: var(--dark);
+  border-color: var(--brown);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+}
+
+/* FADE-IN ANIMATION */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+  .hero-visual { display: none; }
+  section { padding: 4rem 1.5rem; }
+  .strengths-grid, .values-grid { grid-template-columns: 1fr; }
+  .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  .skills-cols { grid-template-columns: 1fr; }
+  footer { padding: 3rem 1.5rem; }
+  .edu-card { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Valencia <span>Walker</span></a>
+  <ul class="nav-links">
+    <li><a href="#statement">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">UX &amp; Web Design Portfolio</p>
+    <h1>Designing for <em>humans,</em><br>powered by code.</h1>
+    <p class="hero-desc">
+      I'm Valencia Walker — a multidisciplinary UX designer and software engineer bridging human psychology, research, and technology to create experiences that are intuitive, accessible, and meaningful.
+    </p>
+    <div class="hero-contacts">
+      <a href="tel:810-880-3042" class="contact-chip">&#128241; 810-880-3042</a>
+      <a href="mailto:vwalker9088@gmail.com" class="contact-chip">&#9993; vwalker9088@gmail.com</a>
+      <a href="https://linktr.ee/valenciawalker" target="_blank" class="contact-chip">&#128279; Linktree</a>
+      <a href="https://www.linkedin.com/in/valencia-walker-306a7477" target="_blank" class="contact-chip">&#128188; LinkedIn</a>
+      <a href="https://github.com/ValenciaW9" target="_blank" class="contact-chip">&#128187; GitHub</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-shape">
+      <div class="hero-shape-inner">
+        <div class="hero-initials">VW</div>
+        <div class="hero-role-tags">
+          <span class="role-tag">UX Designer</span>
+          <span class="role-tag">Software Engineer</span>
+          <span class="role-tag">Ph.D. Candidate</span>
+          <span class="role-tag">Flint, MI</span>
+        </div>
+      </div>
+    </div>
+    <div class="floating-tag ft-1">
+      <span style="font-size:11px;color:#9c8878;letter-spacing:0.05em;">Focus</span>
+      <strong>Human-Centered</strong>
+    </div>
+    <div class="floating-tag ft-2">
+      <span style="font-size:11px;color:#9c8878;letter-spacing:0.05em;">Approach</span>
+      <strong>Research-Led</strong>
+    </div>
+    <div class="floating-tag ft-3">
+      <span style="font-size:11px;color:#9c8878;letter-spacing:0.05em;">Background</span>
+      <strong>Psychology + Code</strong>
+    </div>
+  </div>
+</section>
+
+<!-- PROFESSIONAL STATEMENT -->
+<section class="statement-section" id="statement">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header fade-up">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Professional <em>Statement</em></h2>
+    </div>
+    <div class="statement-body fade-up">
+      <p>I am a detail-oriented and technically skilled cybersecurity and UX professional with a background in software engineering, AI/ML development, and psychological research, bringing a uniquely multidisciplinary perspective to designing and building human-centered digital experiences.</p>
+      <p>I am deeply committed to protecting people and organizations by upholding privacy, ethics, and compliance, while ensuring that solutions remain equitable and accessible to all.</p>
+      <p>My analytical mindset, programming proficiency, and strong communication skills allow me to collaborate effectively across teams and contribute meaningfully to the goals of any organization I serve.</p>
+      <div class="statement-tags">
+        <span class="stmt-tag">Human-Centered Design</span>
+        <span class="stmt-tag">Research-Led</span>
+        <span class="stmt-tag">Accessible by Default</span>
+        <span class="stmt-tag">Cross-Functional</span>
+        <span class="stmt-tag">Ethics-First</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRENGTHS -->
+<section class="strengths-section" id="strengths">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header fade-up">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Core <em>Strengths</em></h2>
+    </div>
+    <div class="strengths-grid">
+      <div class="strength-card fade-up">
+        <div class="strength-num">01</div>
+        <h3>Programming &amp; Technical Skills</h3>
+        <p>Full-stack development, Python, SQL, Node.js, React — applying engineering depth to build the interfaces I design, closing the gap between vision and execution.</p>
+      </div>
+      <div class="strength-card fade-up">
+        <div class="strength-num">02</div>
+        <h3>Analytical Thinking &amp; Problem Solving</h3>
+        <p>Data-driven decision making honed through software engineering, clinical research, and graduate-level statistics — every design decision backed by evidence.</p>
+      </div>
+      <div class="strength-card fade-up">
+        <div class="strength-num">03</div>
+        <h3>Attention to Detail</h3>
+        <p>Precision-focused approach to every pixel, interaction, and user flow — from identifying usability issues to ensuring design systems are consistent and scalable.</p>
+      </div>
+      <div class="strength-card fade-up">
+        <div class="strength-num">04</div>
+        <h3>Communication &amp; Collaboration</h3>
+        <p>Experienced bridging technical and non-technical stakeholders — from engineering teams to clinical researchers — translating complex needs into clear design solutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section" id="values">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header fade-up">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Design <em>Values</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card fade-up">
+        <div class="value-marker vm-orange"></div>
+        <div>
+          <h3>Protecting People &amp; Organizations</h3>
+          <p>Every design decision considers the humans behind the screen — their safety, privacy, and dignity are non-negotiable design constraints.</p>
+        </div>
+      </div>
+      <div class="value-card fade-up">
+        <div class="value-marker vm-green"></div>
+        <div>
+          <h3>Upholding Privacy &amp; Ethics</h3>
+          <p>Grounded in a strong ethical framework shaped by psychology, healthcare, and responsible technology development — design should never exploit.</p>
+        </div>
+      </div>
+      <div class="value-card fade-up">
+        <div class="value-marker vm-brown"></div>
+        <div>
+          <h3>Ensuring Equitable Access</h3>
+          <p>Accessibility is not an afterthought — every interface should be usable by everyone, regardless of ability, device, or technical literacy.</p>
+        </div>
+      </div>
+      <div class="value-card fade-up">
+        <div class="value-marker vm-dark"></div>
+        <div>
+          <h3>Adhering to Laws &amp; Compliance</h3>
+          <p>Dedicated to operating within regulatory frameworks — HIPAA, WCAG, GDPR — ensuring designs protect users and organizations alike.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section" id="experience">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header fade-up">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Professional <em>Experience</em></h2>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Aug 2024 – Present</div>
+          <div class="exp-company">OpenQQuantify</div>
+        </div>
+        <div class="exp-content">
+          <h3>Technology Marketing Director, Software Engineer &amp; Social Media Manager</h3>
+          <ul class="exp-bullets">
+            <li>Fine-tuned GPT-5.0 Mini and GPT-4.0 models for electronics and embedded systems applications, improving domain-specific accuracy and reliability.</li>
+            <li>Designed and implemented multi-agent chatbot architectures where specialized AI agents collaborate on code synthesis, schematic generation, simulation control, and system orchestration.</li>
+            <li>Enabled agents to dynamically exchange context, validate outputs, and refine decisions based on real-time feedback from hardware-in-the-loop (HIL) systems.</li>
+            <li>Developed GPU-accelerated software for RISC-V and low-level programming environments; programmed and optimized SPI, I2C, and UART communication protocols.</li>
+            <li>Converted physical boards into structured 2D schematics and 3D models for use in CesiumJS-based digital twin simulations.</li>
+            <li>Led social media content management for LinkedIn; managed multi-channel marketing campaigns including SEO, SEM, and analytics.</li>
+            <li>Collaborated with cross-functional teams to integrate software with hardware, AI-driven, and embedded systems.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Nov 2024 – Feb 2025</div>
+          <div class="exp-company">MealMatch AI</div>
+        </div>
+        <div class="exp-content">
+          <h3>Backend Engineer</h3>
+          <ul class="exp-bullets">
+            <li>Built and maintained REST APIs facilitating communication between backend and mobile applications, including the Koffee AI recommendation engine.</li>
+            <li>Developed a grocery price comparison app and grocery meal planner app, handling both frontend and backend tasks end-to-end.</li>
+            <li>Designed scalable SQL and NoSQL database architectures to manage user profiles, meal plans, and product inventories.</li>
+            <li>Created and managed cloud infrastructure on AWS, Google Cloud, and Azure; ensured reliability through unit, integration, and performance tests.</li>
+            <li>Implemented security protocols to protect sensitive user information and payment data.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Sep 2020 – Mar 2021</div>
+          <div class="exp-company">PACE Group International</div>
+        </div>
+        <div class="exp-content">
+          <h3>Data Research Specialist</h3>
+          <ul class="exp-bullets">
+            <li>Conducted aviation research data analysis and mining operations, contributing to industry insights and reports.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Oct 2020 – Dec 2020</div>
+          <div class="exp-company">AgentC Solutions LLC</div>
+        </div>
+        <div class="exp-content">
+          <h3>Medicare Advocate</h3>
+          <ul class="exp-bullets">
+            <li>Provided expert client education on Medicare benefits and insurance options while maintaining full HIPAA compliance.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Oct 2019 – Nov 2019</div>
+          <div class="exp-company">Medical Research Center</div>
+        </div>
+        <div class="exp-content">
+          <h3>Clinical Research Coordinator</h3>
+          <ul class="exp-bullets">
+            <li>Managed clinical tasks including conducting case studies, performing patient assessments, and coordinating research workflows.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <div class="exp-date">Aug 2019 – Sep 2019</div>
+          <div class="exp-company">University of Chicago</div>
+        </div>
+        <div class="exp-content">
+          <h3>Survey Coordinator</h3>
+          <ul class="exp-bullets">
+            <li>Researched the Flint Water Crisis and performed quantitative data analysis using Excel for academic reporting.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="edu-section" id="education">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header fade-up">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card fade-up">
+        <div>
+          <h3>Ph.D. in General Psychology</h3>
+          <p>National University &nbsp;·&nbsp; Jun 2025 – Anticipated 2028</p>
+        </div>
+        <span class="edu-pill progress">In Progress</span>
+      </div>
+      <div class="edu-card fade-up">
+        <div>
+          <h3>B.S. in Computer Science — Software Engineering</h3>
+          <p>Colorado Technical University &nbsp;·&nbsp; Oct 2024 – Apr 2028</p>
+        </div>
+        <span class="edu-pill progress">In Progress</span>
+      </div>
+      <div class="edu-card fade-up">
+        <div>
+          <h3>Master of Arts in Psychology</h3>
+          <p>University of Phoenix – Arizona &nbsp;·&nbsp; 2022 – 2024</p>
+        </div>
+        <span class="edu-pill done">Completed</span>
+      </div>
+      <div class="edu-card fade-up">
+        <div>
+          <h3>Bachelor of Science in Health Administration</h3>
+          <p>University of Michigan – Flint &nbsp;·&nbsp; 2014 – 2018</p>
+        </div>
+        <span class="edu-pill done">Completed</span>
+      </div>
+      <div class="edu-card fade-up">
+        <div>
+          <h3>Associate of Science in Health Care Administration</h3>
+          <p>Colorado Technical University &nbsp;·&nbsp; 2011 – 2013</p>
+        </div>
+        <span class="edu-pill done">Completed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs-section" id="certs">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header fade-up">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Certifications <em>&amp; Courses</em></h2>
+    </div>
+    <div class="certs-flow fade-up">
+      <span class="cert-item">IBM Full Stack Developer</span>
+      <span class="cert-item">IBM Python for Data Science, AI &amp; Dev</span>
+      <span class="cert-item">IBM Node.js &amp; Express</span>
+      <span class="cert-item">IBM React</span>
+      <span class="cert-item">IBM Cloud Computing</span>
+      <span class="cert-item">IBM Git &amp; GitHub</span>
+      <span class="cert-item">IBM HTML, CSS &amp; JavaScript</span>
+      <span class="cert-item">IBM Intro to Software Engineering</span>
+      <span class="cert-item">FreeCodeCamp — Full Stack Developer</span>
+      <span class="cert-item">Flatiron School — Software Engineering</span>
+      <span class="cert-item">Harvard CS50</span>
+      <span class="cert-item">CITI — Social &amp; Behavioral RCR</span>
+      <span class="cert-item">CITI — Human Subject Research</span>
+      <span class="cert-item">CITI — IRB Social &amp; Behavioral</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-header fade-up">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Technical <em>Skills</em></h2>
+    </div>
+    <div class="skills-cols">
+      <div class="skill-group fade-up">
+        <h3>UX &amp; Design</h3>
+        <ul>
+          <li>User Research &amp; Testing</li>
+          <li>Wireframing &amp; Prototyping</li>
+          <li>Information Architecture</li>
+          <li>Accessibility (WCAG)</li>
+          <li>Design Systems</li>
+          <li>Interaction Design</li>
+        </ul>
+      </div>
+      <div class="skill-group fade-up">
+        <h3>Frontend &amp; Web</h3>
+        <ul>
+          <li>HTML, CSS, JavaScript</li>
+          <li>React &amp; React Native</li>
+          <li>TypeScript</li>
+          <li>Tailwind CSS</li>
+          <li>Flutter</li>
+          <li>Responsive Design</li>
+        </ul>
+      </div>
+      <div class="skill-group fade-up">
+        <h3>Backend &amp; Tools</h3>
+        <ul>
+          <li>Python, Node.js, FastAPI</li>
+          <li>PostgreSQL, MySQL, NoSQL</li>
+          <li>REST APIs &amp; GraphQL</li>
+          <li>AWS, Azure, Google Cloud</li>
+          <li>Docker &amp; Kubernetes</li>
+          <li>Git &amp; CI/CD</li>
+        </ul>
+      </div>
+      <div class="skill-group fade-up">
+        <h3>AI &amp; Research</h3>
+        <ul>
+          <li>GPT-4 Fine-tuning</li>
+          <li>PyTorch &amp; TensorFlow</li>
+          <li>Multi-Agent Architectures</li>
+          <li>Quantitative Analysis</li>
+          <li>Clinical Research</li>
+          <li>Statistical Methods</li>
+        </ul>
+      </div>
+      <div class="skill-group fade-up">
+        <h3>Embedded &amp; Hardware</h3>
+        <ul>
+          <li>RISC-V, Arduino, Raspberry Pi</li>
+          <li>ESP32, STM32</li>
+          <li>SPI / I2C / UART</li>
+          <li>Digital Twins (CesiumJS)</li>
+          <li>2D/3D Board Modeling</li>
+          <li>GPU Acceleration (CUDA)</li>
+        </ul>
+      </div>
+      <div class="skill-group fade-up">
+        <h3>Security &amp; Strategy</h3>
+        <ul>
+          <li>OAuth2, JWT, HTTPS</li>
+          <li>SQL Injection Prevention</li>
+          <li>HIPAA Compliance</li>
+          <li>SEO &amp; SEM</li>
+          <li>Agile / Scrum</li>
+          <li>Product Strategy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="footer-name">Valencia Walker</div>
+  <div class="footer-links">
+    <a href="mailto:vwalker9088@gmail.com" class="footer-link">&#9993; vwalker9088@gmail.com</a>
+    <a href="tel:810-880-3042" class="footer-link">&#128241; 810-880-3042</a>
+    <a href="https://linktr.ee/valenciawalker" target="_blank" class="footer-link">&#128279; Linktree</a>
+    <a href="https://www.linkedin.com/in/valencia-walker-306a7477" target="_blank" class="footer-link">&#128188; LinkedIn</a>
+    <a href="https://github.com/ValenciaW9" target="_blank" class="footer-link">&#128187; GitHub</a>
+    <a href="https://www.openqquantify.com/" target="_blank" class="footer-link">&#127758; OpenQQuantify</a>
+  </div>
+  <p class="footer-copy">&#169; 2025 Valencia Walker &nbsp;·&nbsp; UX &amp; Web Design Portfolio &nbsp;·&nbsp; Flint, MI</p>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  document.querySelectorAll('a, button, .cert-item, .strength-card, .value-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
+      ring.style.transform = 'translate(-50%, -50%) scale(1.5)';
+      ring.style.opacity = '0.8';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      ring.style.transform = 'translate(-50%, -50%) scale(1)';
+      ring.style.opacity = '0.5';
+    });
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
