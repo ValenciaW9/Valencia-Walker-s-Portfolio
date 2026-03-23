@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valencia Walker | Cybersecurity Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #0f1525;
+    --bg3: #141c30;
+    --surface: #1a2340;
+    --surface2: #1f2a4a;
+    --border: rgba(100, 160, 255, 0.15);
+    --border2: rgba(100, 160, 255, 0.25);
+    --accent: #4a9eff;
+    --accent2: #00d4aa;
+    --accent3: #a855f7;
+    --text: #e8edf5;
+    --text2: #8899bb;
+    --text3: #5566880;
+    --danger: #ff6b6b;
+    --warn: #ffa726;
+    --success: #00d4aa;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74, 158, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74, 158, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 14, 26, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+  }
+
+  nav .inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent2);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    padding: 6rem 0 4rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(74, 158, 255, 0.1);
+    border: 1px solid rgba(74, 158, 255, 0.3);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent2);
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+  }
+
+  /* PROFESSIONAL STATEMENT */
+  .statement-section {
+    padding: 3rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .statement-card {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 16px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .statement-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 2rem;
+    font-family: 'DM Serif Display', serif;
+    font-size: 8rem;
+    color: rgba(74, 158, 255, 0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .statement-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+  }
+
+  .statement-card p + p { margin-top: 1rem; }
+
+  /* SKILLS GRID */
+  .skills-section { padding: 3rem 0; border-top: 1px solid var(--border); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .skill-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+  }
+
+  .skill-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 16px;
+  }
+
+  .skill-icon.blue { background: rgba(74, 158, 255, 0.15); }
+  .skill-icon.teal { background: rgba(0, 212, 170, 0.15); }
+  .skill-icon.purple { background: rgba(168, 85, 247, 0.15); }
+  .skill-icon.orange { background: rgba(255, 167, 38, 0.15); }
+
+  .skill-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .skill-card p {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  /* VALUES */
+  .values-section { padding: 3rem 0; border-top: 1px solid var(--border); }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+
+  .value-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .value-dot.blue { background: var(--accent); }
+  .value-dot.teal { background: var(--accent2); }
+  .value-dot.purple { background: var(--accent3); }
+  .value-dot.orange { background: var(--warn); }
+
+  .value-item p {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .value-item strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  /* CERTS */
+  .certs-section { padding: 3rem 0; border-top: 1px solid var(--border); }
+
+  .cert-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cert-tag {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text2);
+    letter-spacing: 0.03em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .cert-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* EDUCATION */
+  .edu-section { padding: 3rem 0; border-top: 1px solid var(--border); }
+
+  .edu-grid { display: grid; gap: 1rem; }
+
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .edu-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .edu-card p {
+    font-size: 13px;
+    color: var(--text2);
+  }
+
+  .edu-badge {
+    background: rgba(74, 158, 255, 0.1);
+    border: 1px solid rgba(74, 158, 255, 0.25);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* EXPERIENCE */
+  .exp-section { padding: 3rem 0; border-top: 1px solid var(--border); }
+
+  .exp-timeline { display: grid; gap: 1.25rem; }
+
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    border-left: 3px solid var(--accent);
+    transition: border-color 0.2s;
+  }
+
+  .exp-card:hover { border-color: var(--accent2); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .exp-card .org {
+    font-size: 13px;
+    color: var(--accent2);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text2);
+    white-space: nowrap;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    flex-shrink: 0;
+  }
+
+  .exp-bullets {
+    margin-top: 0.75rem;
+    padding-left: 1rem;
+    list-style: none;
+  }
+
+  .exp-bullets li {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.7;
+    padding: 2px 0;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '›';
+    position: absolute;
+    left: -1rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text2);
+    letter-spacing: 0.05em;
+  }
+
+  footer a { color: var(--accent2); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .values-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .edu-card { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <span class="nav-logo">VW // CYBERSECURITY</span>
+    <div class="nav-links">
+      <a href="#statement">Statement</a>
+      <a href="#skills">Skills</a>
+      <a href="#values">Values</a>
+      <a href="#certs">Certifications</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Cybersecurity Portfolio — 2025</div>
+    <h1>Valencia <em>Walker</em></h1>
+    <p class="hero-sub">Software Engineer &nbsp;/&nbsp; Cybersecurity Analyst &nbsp;/&nbsp; Ph.D. Candidate</p>
+    <p style="font-size:15px; color:var(--text2); max-width:580px; line-height:1.7;">
+      Multidisciplinary technologist based in Flint, MI — bridging software engineering, AI/ML, psychology, and emerging cybersecurity expertise to protect people and systems.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.5rem; align-items:center;">
+      <a href="tel:810-880-3042" style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text2); text-decoration:none; display:flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 14px; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--border2)'" onmouseout="this.style.color='var(--text2)';this.style.borderColor='var(--border)'">&#128241; 810-880-3042</a>
+      <a href="mailto:vwalker9088@gmail.com" style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text2); text-decoration:none; display:flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 14px; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--border2)'" onmouseout="this.style.color='var(--text2)';this.style.borderColor='var(--border)'">&#128140; vwalker9088@gmail.com</a>
+      <a href="https://linktr.ee/valenciawalker" target="_blank" style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text2); text-decoration:none; display:flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 14px; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--accent2)';this.style.borderColor='var(--border2)'" onmouseout="this.style.color='var(--text2)';this.style.borderColor='var(--border)'">&#128279; Linktree</a>
+      <a href="https://www.linkedin.com/in/valencia-walker-306a7477" target="_blank" style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text2); text-decoration:none; display:flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 14px; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--border2)'" onmouseout="this.style.color='var(--text2)';this.style.borderColor='var(--border)'">&#128188; LinkedIn</a>
+      <a href="https://github.com/ValenciaW9" target="_blank" style="font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text2); text-decoration:none; display:flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 14px; transition:color 0.2s, border-color 0.2s;" onmouseover="this.style.color='var(--accent)';this.style.borderColor='var(--border2)'" onmouseout="this.style.color='var(--text2)';this.style.borderColor='var(--border)'">&#128187; GitHub</a>
+    </div>
+  </section>
+
+  <!-- PROFESSIONAL STATEMENT -->
+  <section class="statement-section" id="statement">
+    <div class="section-label">Professional Statement</div>
+    <div class="statement-card">
+      <p>I am a detail-oriented and technically skilled cybersecurity professional with a background in software engineering, AI/ML development, and psychological research, bringing a uniquely multidisciplinary perspective to identifying and mitigating security risks.</p>
+      <p>I am deeply committed to protecting people and organizations by upholding privacy, ethics, and compliance, while ensuring that security solutions remain equitable and accessible to all.</p>
+      <p>My analytical mindset, programming proficiency, and strong communication skills allow me to collaborate effectively across teams and contribute meaningfully to the security goals of any organization I serve.</p>
+    </div>
+  </section>
+
+  <!-- STRENGTHS / SKILLS -->
+  <section class="skills-section" id="skills">
+    <div class="section-label">Core Strengths</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon blue">&#128187;</div>
+        <h3>Programming &amp; Technical Skills</h3>
+        <p>Full-stack development, Python, SQL, Node.js, React, embedded systems, and AI/ML — applying engineering rigor to security challenges.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon teal">&#128270;</div>
+        <h3>Analytical Thinking</h3>
+        <p>Data-driven problem solving honed through software engineering, clinical research coordination, and graduate-level statistics coursework.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon purple">&#128064;</div>
+        <h3>Attention to Detail</h3>
+        <p>Precision-focused approach to identifying vulnerabilities, reviewing logs, and ensuring compliance across complex technical systems.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon orange">&#128172;</div>
+        <h3>Communication &amp; Collaboration</h3>
+        <p>Experienced communicating technical concepts across disciplines — from engineering teams to clinical and healthcare stakeholders.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values-section" id="values">
+    <div class="section-label">Values</div>
+    <div class="values-grid">
+      <div class="value-item">
+        <div class="value-dot blue"></div>
+        <div>
+          <strong>Protecting People &amp; Organizations</strong>
+          <p>Committed to safeguarding sensitive data and digital infrastructure that real people depend on every day.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-dot teal"></div>
+        <div>
+          <strong>Upholding Privacy &amp; Ethics</strong>
+          <p>Grounded in a strong ethical framework shaped by psychology, healthcare, and responsible technology development.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-dot purple"></div>
+        <div>
+          <strong>Ensuring Equitable Access</strong>
+          <p>Believing that security solutions should protect everyone — not just those with resources — and designing with inclusion in mind.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-dot orange"></div>
+        <div>
+          <strong>Adhering to Laws &amp; Compliance</strong>
+          <p>Dedicated to operating within regulatory frameworks and holding organizations accountable to their security obligations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="exp-section" id="experience">
+    <div class="section-label">Professional Experience</div>
+    <div class="exp-timeline">
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <h3>Technology Marketing Director, Software Engineer &amp; Social Media Manager</h3>
+            <span class="org">OpenQQuantify — Remote</span>
+          </div>
+          <span class="exp-date">Aug 2024 – Present</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Fine-tuned GPT-5.0 Mini and GPT-4.0 models for electronics and embedded systems applications, improving domain-specific accuracy and reliability.</li>
+          <li>Designed and implemented multi-agent chatbot architectures where specialized AI agents collaborate on code synthesis, schematic generation, simulation control, and system orchestration.</li>
+          <li>Enabled agents to dynamically exchange context, validate outputs, and refine decisions based on real-time feedback from hardware-in-the-loop (HIL) systems.</li>
+          <li>Developed GPU-accelerated software for RISC-V and low-level programming environments; programmed and optimized SPI, I2C, and UART communication protocols.</li>
+          <li>Converted physical boards (Arduino, Photon, Raspberry Pi, Intel, ESP32) into structured 2D schematics and 3D models for use in CesiumJS-based digital twin simulations.</li>
+          <li>Led social media content management for LinkedIn; managed multi-channel marketing campaigns including SEO, SEM, and analytics.</li>
+          <li>Collaborated with cross-functional teams to integrate software with hardware, AI-driven, and embedded systems; contributed to open-source Generative AI projects.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <h3>Backend Engineer</h3>
+            <span class="org">MealMatch AI — Remote</span>
+          </div>
+          <span class="exp-date">Nov 2024 – Feb 2025</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built and maintained REST APIs facilitating communication between backend and mobile applications, including the Koffee AI recommendation engine.</li>
+          <li>Developed a grocery price comparison app and grocery meal planner app, handling both frontend and backend tasks end-to-end.</li>
+          <li>Designed scalable SQL and NoSQL database architectures to manage user profiles, meal plans, and product inventories.</li>
+          <li>Created and managed cloud infrastructure on AWS, Google Cloud, and Azure; ensured reliability through unit, integration, and performance tests.</li>
+          <li>Implemented security protocols to protect sensitive user information and payment data; collaborated with CTO and product managers on MVP requirements.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <h3>Data Research Specialist</h3>
+            <span class="org">PACE Group International — Remote</span>
+          </div>
+          <span class="exp-date">Sep 2020 – Mar 2021</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Conducted aviation research data analysis and mining operations, contributing to industry insights and reports.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <h3>Medicare Advocate</h3>
+            <span class="org">AgentC Solutions LLC — Remote</span>
+          </div>
+          <span class="exp-date">Oct 2020 – Dec 2020</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Provided expert client education on Medicare benefits and insurance options while maintaining full HIPAA compliance.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <h3>Clinical Research Coordinator</h3>
+            <span class="org">Medical Research Center — Flint, MI</span>
+          </div>
+          <span class="exp-date">Oct 2019 – Nov 2019</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed clinical tasks including conducting case studies, performing patient assessments, and coordinating research workflows.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <h3>Survey Coordinator</h3>
+            <span class="org">The University of Chicago — Remote</span>
+          </div>
+          <span class="exp-date">Aug 2019 – Sep 2019</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Researched the Flint Water Crisis and performed quantitative data analysis using Excel for academic reporting.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="certs-section" id="certs">
+    <div class="section-label">Certifications</div>
+    <div class="cert-list">
+      <span class="cert-tag">IBM Full Stack Developer</span>
+      <span class="cert-tag">IBM Python for Data Science, AI &amp; Dev</span>
+      <span class="cert-tag">IBM Node.js &amp; Express</span>
+      <span class="cert-tag">IBM React</span>
+      <span class="cert-tag">IBM Cloud Computing</span>
+      <span class="cert-tag">IBM Git &amp; GitHub</span>
+      <span class="cert-tag">IBM HTML, CSS &amp; JavaScript</span>
+      <span class="cert-tag">IBM Intro to Software Engineering</span>
+      <span class="cert-tag">FreeCodeCamp Full Stack Developer</span>
+      <span class="cert-tag">Flatiron School — Software Engineering</span>
+      <span class="cert-tag">Harvard CS50</span>
+      <span class="cert-tag">CITI — Social &amp; Behavioral RCR</span>
+      <span class="cert-tag">CITI — Human Subject Research</span>
+      <span class="cert-tag">CITI — IRB Social &amp; Behavioral</span>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="edu-section" id="education">
+    <div class="section-label">Education</div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div>
+          <h3>Ph.D. in General Psychology</h3>
+          <p>National University &nbsp;·&nbsp; Jun 2025 – Anticipated 2028</p>
+        </div>
+        <span class="edu-badge">In Progress</span>
+      </div>
+      <div class="edu-card">
+        <div>
+          <h3>B.S. in Computer Science — Software Engineering</h3>
+          <p>Colorado Technical University &nbsp;·&nbsp; Oct 2024 – Apr 2028</p>
+        </div>
+        <span class="edu-badge">In Progress</span>
+      </div>
+      <div class="edu-card">
+        <div>
+          <h3>Master of Arts in Psychology</h3>
+          <p>University of Phoenix – Arizona &nbsp;·&nbsp; 2022 – 2024</p>
+        </div>
+        <span class="edu-badge" style="background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.25);color:var(--accent2);">Completed</span>
+      </div>
+      <div class="edu-card">
+        <div>
+          <h3>B.S. in Health Administration</h3>
+          <p>University of Michigan – Flint &nbsp;·&nbsp; 2014 – 2018</p>
+        </div>
+        <span class="edu-badge" style="background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.25);color:var(--accent2);">Completed</span>
+      </div>
+      <div class="edu-card">
+        <div>
+          <h3>Associate of Science in Health Care Administration</h3>
+          <p>Colorado Technical University &nbsp;·&nbsp; 2011 – 2013</p>
+        </div>
+        <span class="edu-badge" style="background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.25);color:var(--accent2);">Completed</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>Valencia Walker &nbsp;·&nbsp; Flint, MI &nbsp;·&nbsp; <a href="mailto:vwalker9088@gmail.com">vwalker9088@gmail.com</a> &nbsp;·&nbsp; <a href="tel:810-880-3042">810-880-3042</a></p>
+    <p style="margin-top:6px;"><a href="https://linktr.ee/valenciawalker" target="_blank">Linktree</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/valencia-walker-306a7477" target="_blank">LinkedIn</a> &nbsp;·&nbsp; <a href="https://github.com/ValenciaW9" target="_blank">GitHub</a> &nbsp;·&nbsp; OpenQQuantify</p>
+    <p style="margin-top:8px; opacity:0.5;">Cybersecurity Portfolio &mdash; 2025</p>
+  </div>
+</footer>
+
+</body>
+</html>
